@@ -1,0 +1,30 @@
+{
+  "name": "beam",
+  "version": "0.0.1",
+  "description": "Watch files using `fswatch` and sync them using `rsync` with a remote server.",
+  "main": "beam.js",
+  "preferGlobal": true,
+  "bin": {
+    "beam": "bin/beam"
+  },
+  "author": "Zaid Daba'een",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "rsync": "^0.6.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaiddabaeen/beam.git"
+  },
+  "keywords": [
+    "fswatch",
+    "rsync",
+    "beam"
+  ],
+  "bugs": {
+    "url": "https://github.com/zaiddabaeen/beam/issues"
+  },
+  "homepage": "https://github.com/zaiddabaeen/beam#readme"
+}
