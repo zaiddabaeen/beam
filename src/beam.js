@@ -24,6 +24,7 @@ module.exports = () => {
 
   const rootDestinationPath = remoteHost + ":" + remotePath;
   const filesPath = settings.filesCwd;
+  const extensions = settings.fileExtension.split(',');
   const path = localPath + filesPath;
 
   log(`Syncing with ${remoteHost}`);
@@ -32,6 +33,20 @@ module.exports = () => {
   const filesChanged = new Set();
 
   function filterFiles(files) {
+    if (extensions.length === 1) {
+      return files.filter(f => f.endsWith(settings.fileExtension));
+    } else if (extensions.length > 1) {
+      return files.filter(f => {
+        let keep = false;
+        for (let ext of extensions) {
+          if (f.endsWith(ext)) {
+            keep = true;
+            break;
+          }
+        }
+        return keep;
+      });
+    }
     return files.filter(v => v.endsWith(settings.fileExtension));
   }
 
