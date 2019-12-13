@@ -45,7 +45,7 @@ beam --remote-host=<host> --remote-path=<path> <options>
 -p --remote-path ......... Set the path to sync with, defaults to $BEAM_REMOTE_PATH
 -c --cwd ................. Set the current working directory for syncing, defaults to $BEAM_CWD then ./
 -e --extension ........... Set the file extension to sync, defaults to $BEAM_EXT then all
--i --interval ............ Set the sync interval, defaults to 5000 (ms)
+-i --interval ............ Set the sync interval, defaults to 1000 (ms)
 -v ....................... verbose logging
 --help ................... show this help message
 

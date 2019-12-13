@@ -83,7 +83,7 @@ module.exports = () => {
     filesPath,
     {
       recursive: true,
-      interval: 1000
+      interval: settings.fsWatchInterval
     },
     (event, filename) => {
       filesChanged.add(filename);

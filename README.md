@@ -27,8 +27,8 @@ rsync -zR [file] [remote-host]:[remote-path]/[cwd]/
 Example:
 beam --remote-host=192.168.1.1 --remote-path=~/backend --cwd=src/ -e=.js
 
-Would watch .go files from /Users/zaiddabaeen/
-and sync them every 5000ms relatively using
+Would watch .js files from /Users/zaiddabaeen/
+and sync them every 1000ms relatively using
 rsync -zR [file] 192.168.1.1:~/backend/src/
 ```
 

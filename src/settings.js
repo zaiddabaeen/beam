@@ -5,7 +5,8 @@ let settings = {
   remotePath: process.env["BEAM_REMOTE_PATH"],
   filesCwd: process.env["BEAM_CWD"] || './',
   fileExtension: process.env["BEAM_EXT"] || '',
-  interval: 5000,
+  interval: 1000,
+  fsWatchInterval: 500,
 };
 
 module.exports = settings;
