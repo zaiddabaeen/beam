@@ -1,6 +1,6 @@
 const beam = require("./src/beam");
 const minimist = require("minimist");
-const settings = require("./src/settings");
+const { settings } = require("./src/settings");
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2), {

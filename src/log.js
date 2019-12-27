@@ -1,4 +1,4 @@
-const settings = require("./settings");
+const { settings } = require("./settings");
 
 function log(message, ...optionalParams) {
   const date = (new Date()).toISOString();

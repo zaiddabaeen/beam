@@ -1,9 +1,11 @@
 const fs = require("fs");
 const Rsync = require("rsync");
 const { log, vlog } = require("./log");
-const settings = require("./settings");
+const {settings, applyEnv} = require("./settings");
 
 module.exports = () => {
+  applyEnv();
+
   const remoteHost = settings.remoteHost;
   if (!remoteHost) {
     throw Error(
@@ -32,7 +34,7 @@ module.exports = () => {
 
   const filesChanged = new Set();
 
-  function filterFiles(files) {
+  function includesFilesByExtension(files) {
     if (extensions.length === 1) {
       return files.filter(f => f.endsWith(settings.fileExtension));
     } else if (extensions.length > 1) {
@@ -50,8 +52,18 @@ module.exports = () => {
     return files.filter(v => v.endsWith(settings.fileExtension));
   }
 
+  function excludeByStartWith(files) {
+    return files.filter(v => !v.startsWith(".git"));
+  }
+
+  function excludeFilesByExtension(files) {
+    return files.filter(v => !v.endsWith("~"));
+  }
+
   function runRsync() {
-    const files = filterFiles([...filesChanged]);
+    let files = includesFilesByExtension([...filesChanged]);
+    files = excludeByStartWith([...files]);
+    files = excludeFilesByExtension([...files]);
 
     const rsync = new Rsync()
       .flags("zR", true)
@@ -80,7 +92,7 @@ module.exports = () => {
   }
 
   fs.watch(
-    filesPath,
+    filesPath || './',
     {
       recursive: true,
       interval: settings.fsWatchInterval
