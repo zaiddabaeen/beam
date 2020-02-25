@@ -9,12 +9,16 @@ module.exports = () => {
       'p' : 'remote-path',
       'c' : 'cwd',
       'e' : 'extension',
-      'i' : 'interval'
+      'i' : 'interval',
     }
   });
 
   if (args["v"]) {
     settings.debug = "v";
+  }
+
+  if (args['sync-initial']) {
+    settings.syncInitial = true;
   }
 
   if (typeof args["h"] === "string") {
@@ -46,6 +50,7 @@ beam --remote-host=<host> --remote-path=<path> <options>
 -c --cwd ................. Set the current working directory for syncing, defaults to $BEAM_CWD then ./
 -e --extension ........... Set the file extension to sync, defaults to $BEAM_EXT then all
 -i --interval ............ Set the sync interval, defaults to 1000 (ms)
+--sync-initial ........... Performs an initial sync at start with --checksum flag to rsync
 -v ....................... verbose logging
 --help ................... show this help message
 

@@ -7,6 +7,7 @@ settings = {
   fileExtension: '',
   interval: 1000,
   fsWatchInterval: 500,
+  syncInitial: false,
 };
 
 let applyEnv = function() {

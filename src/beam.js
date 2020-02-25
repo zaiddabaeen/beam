@@ -66,7 +66,7 @@ module.exports = () => {
     files = excludeFilesByExtension([...files]);
 
     const rsync = new Rsync()
-      .flags("zR", true)
+      .flags("zR", true)// // z: compress, R: relative
       .destination(rootDestinationPath + filesPath);
 
     rsync.cwd(path);
@@ -89,6 +89,37 @@ module.exports = () => {
     }
 
     filesChanged.clear();
+  }
+
+  function performInitialSync() {
+    const rsync = new Rsync()
+      .flags("zrRcn", true) // z: compress, r: recursive, R: relative, c: checksum
+      .exclude(['.git', '.DS_Store'])
+      .destination(rootDestinationPath + filesPath);
+
+    if (extensions.length) {
+      extensions.forEach((e) => {
+        rsync.include(e);
+      });
+    }
+
+    rsync.cwd(path);
+
+    rsync.execute((err, code, cmd) => {
+      if (err) {
+        log("Error: " + err);
+        log("Code: " + code);
+        log("Command: " + cmd);
+        log("");
+      }
+
+      log("Initially Synced");
+      vlog(cmd + "\n");
+    });
+  }
+
+  if (settings.syncInitial) {
+    performInitialSync();
   }
 
   fs.watch(
